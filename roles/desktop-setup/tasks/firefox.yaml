@@ -1,0 +1,24 @@
+---
+- name: Add apt-repo firefox
+  apt_repository:
+    repo: ppa:mozillateam/firefox-next
+    state: present
+
+- name: Install firefox
+  apt:
+    name: firefox
+    state: latest
+    update_cache: yes
+
+- name: Resolve firefox flash issue
+  apt:
+    name: ffmpeg
+    state: present
+
+###
+#
+# Extensions to manually install on firefox
+#
+# uBlock Origin
+#
+###

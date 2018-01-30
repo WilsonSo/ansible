@@ -1,0 +1,26 @@
+---
+- name: Install basic applications
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim
+    - git
+    - gnome-tweak-tool
+    - tree
+
+- name: Install media applications
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vlc
+
+- name: Import firefox task
+  import_tasks: firefox.yaml
+
+- name: Import chrome task
+  import_tasks: google-chrome.yaml
+
+- name: Import sublime task
+  import_tasks: sublime-text.yaml
