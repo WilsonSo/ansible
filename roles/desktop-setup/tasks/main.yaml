@@ -16,6 +16,15 @@
   with_items:
     - vlc
 
+- name: setup bashrc and vimrc
+  copy:
+    src: /home/socen/development/ansible/roles/files/{{ item }}
+    dest: /home/socen/.{{ item }}
+  with_items:
+    - bashrc
+    - vimrc
+
+
 - name: Import firefox task
   import_tasks: firefox.yaml
 
