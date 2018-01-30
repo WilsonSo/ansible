@@ -8,6 +8,7 @@
     - git
     - gnome-tweak-tool
     - tree
+    - terminator
 
 - name: Install media applications
   apt:
