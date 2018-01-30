@@ -1,5 +1,3 @@
----
-
 ###
 #
 # Gnome edits for customizing
