@@ -33,3 +33,6 @@
 
 - name: Import sublime task
   import_tasks: sublime-text.yaml
+
+- name: Import spotify task
+  import_tasks: spotify.yaml
