@@ -37,3 +37,6 @@
 
 - name: Import spotify task
   import_tasks: spotify.yaml
+
+- name: Import fluxgui task
+  import_tasks: fluxgui.yaml
