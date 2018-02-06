@@ -17,6 +17,15 @@
   with_items:
     - vlc
 
+- name: Install development applications
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vagrant
+    - virtualbox
+
+
 - name: setup bashrc and vimrc
   copy:
     src: /home/socen/development/ansible/roles/files/{{ item }}
