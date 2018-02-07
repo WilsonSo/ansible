@@ -18,11 +18,13 @@ then
   exit 1
 fi
 
+
 # pip check
 if [ -z $(which pip) ];
 then
   apt-get install python-pip -y
 fi
+
 
 # ansible check
 if [ -z $(which ansible) ];
@@ -30,11 +32,13 @@ then
   pip install ansible
 fi
 
+
 # git check
 if [ -z $(which git) ];
 then
   apt-get install git
 fi
+
 
 # repo check
 if [ -d /home/socen/development/ansible ];
@@ -47,15 +51,8 @@ else
   cd ansible
 fi
 
-# run playbook
-# if [ -n $(which ansible) ];
-# then
-#   ansible-playbook playbooks/ubuntu-desktop.yaml -K
-# else
-#   echo "Ansible needs to be installed"
-#   exit 1
-# fi
 
+# case statement for arguments
 arg=$1
 
 case $arg
