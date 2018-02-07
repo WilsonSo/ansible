@@ -48,10 +48,28 @@ else
 fi
 
 # run playbook
-if [ -n $(which ansible) ];
-then
-  ansible-playbook playbooks/ubuntu-desktop.yaml -K
-else
-  echo "Ansible needs to be installed"
-  exit 1
-fi
+# if [ -n $(which ansible) ];
+# then
+#   ansible-playbook playbooks/ubuntu-desktop.yaml -K
+# else
+#   echo "Ansible needs to be installed"
+#   exit 1
+# fi
+
+arg=$1
+
+case $arg
+in
+  check)
+    echo "Running ansible check"
+    ansible-playbook playbooks/ubuntu-desktop.yaml -K --check
+    ;;
+  diff)
+    echo "Running ansible check and diff"
+    ansible-playbook playbooks/ubuntu-desktop.yaml -K --check --diff
+    ;;
+  *)
+    echo "Running ansible"
+    ansible-playbook playbooks/ubuntu-desktop.yaml -K
+    ;;
+esac
