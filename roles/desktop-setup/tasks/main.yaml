@@ -9,6 +9,7 @@
     - gnome-tweak-tool
     - tree
     - terminator
+    - ntp
 
 - name: Install media applications
   apt:
