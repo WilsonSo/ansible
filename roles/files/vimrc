@@ -15,7 +15,7 @@ set hlsearch
 
 " Basic vim settings
 set hidden
-set visualbell
+set novisualbell
 set number
 set nobackup
 set noswapfile

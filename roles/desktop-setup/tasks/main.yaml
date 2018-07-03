@@ -6,10 +6,10 @@
   with_items:
     - vim
     - git
-    - gnome-tweak-tool
     - tree
     - terminator
     - ntp
+    - tmux
 
 - name: Install media applications
   apt:
@@ -48,5 +48,5 @@
 - name: Import spotify task
   import_tasks: spotify.yaml
 
-- name: Import fluxgui task
-  import_tasks: fluxgui.yaml
+- name: Import docker task
+  import_tasks: docker.yaml
