@@ -1,5 +1,5 @@
 ---
-- name: Set up Ubuntu Gnome Desktop
+- name: Set up Desktop
   hosts: localhost
   connection: local
   user: socen

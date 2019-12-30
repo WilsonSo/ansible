@@ -1,0 +1,28 @@
+---
+- name: Install basic applications
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim
+    - git
+    - tree
+    - ntp
+    - tmux
+
+- name: setup bashrc and vimrc
+  copy:
+    src: /home/socen/development/ansible/roles/files/{{ item }}
+    dest: /home/socen/.{{ item }}
+  with_items:
+    - bashrc
+    - vimrc
+
+
+- name: Setup Linux
+  import_tasks: linux-setup.yaml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Setup Mac OS X
+  import_tasks: mac-setup.yaml
+  when: ansible_distribution == 'MacOSX'

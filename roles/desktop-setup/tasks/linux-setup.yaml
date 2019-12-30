@@ -1,0 +1,18 @@
+---
+- name: Install linux applications
+  apt:
+    name:
+    - vim
+    - git
+    - tree
+    - terminator
+    - ntp
+    - tmux
+
+- name: Linux setup bashrc and vimrc
+  copy:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "/home/socen/.{{ item }}"
+  with_items:
+    - bashrc
+    - vimrc

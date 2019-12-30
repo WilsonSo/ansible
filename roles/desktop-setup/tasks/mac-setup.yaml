@@ -1,0 +1,42 @@
+---
+- name: Mac setup bashrc and vimrc
+  copy:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "/Users/socen/.{{ item }}"
+  with_items:
+    - zshrc
+    - vimrc
+
+- name: Set up touchid sudo
+  copy:
+    src: "{{ role_path }}/files/mac/pam_sudo"
+    dest: "/etc/pam.d/sudo"
+
+- name: Install brew mac applications
+  become_user: socen
+  homebrew:
+    update_homebrew: yes
+    package:
+    - tree
+    - ntp
+    - tmux
+    - curl
+    - nmap
+    - vim
+
+- name: Install brew cask mac applications
+  become_user: socen
+  homebrew_cask:
+    package:
+    - spectacle
+    - iterm2
+    - dash
+    - textexpander
+    - alfred
+    - postman
+    - spotify
+    - vlc
+    - slack
+    - karabiner-elements
+    - whatsapp
+    - coconutbattery
