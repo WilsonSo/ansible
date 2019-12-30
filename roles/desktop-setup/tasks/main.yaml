@@ -1,52 +1,8 @@
 ---
-- name: Install basic applications
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - vim
-    - git
-    - tree
-    - terminator
-    - ntp
-    - tmux
+- name: Setup Mac OS X
+  import_tasks: mac-setup.yaml
+  when: ansible_distribution == 'MacOSX'
 
-- name: Install media applications
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - vlc
-
-- name: Install development applications
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - vagrant
-    - virtualbox
-
-
-- name: setup bashrc and vimrc
-  copy:
-    src: /home/socen/development/ansible/roles/files/{{ item }}
-    dest: /home/socen/.{{ item }}
-  with_items:
-    - bashrc
-    - vimrc
-
-
-- name: Import firefox task
-  import_tasks: firefox.yaml
-
-- name: Import chrome task
-  import_tasks: google-chrome.yaml
-
-- name: Import sublime task
-  import_tasks: sublime-text.yaml
-
-- name: Import spotify task
-  import_tasks: spotify.yaml
-
-- name: Import docker task
-  import_tasks: docker.yaml
+- name: Setup Linux
+  import_tasks: linux-setup.yaml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

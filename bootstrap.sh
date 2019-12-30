@@ -1,7 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-###
-#
 # self installation for ansible
 #
 # pull from git and run ansible-playbook
@@ -12,61 +10,51 @@
 
 
 # root check
-if [ $(id -u) -ne 0 ];
+if [ "$(id -u)" -ne 0 ];
 then
   echo "This script must be run as root"
   exit 1
 fi
 
+if [ "$(uname -s)" == "Linux" ]; then
+  if [ -z "$(which pip)" ]; then
+    apt-get install python-pip -y
+  fi
+elif [ "$(uname -s)" == "Darwin" ]; then
+  if [ -z "$(which pip)" ]; then
+    easy_install pip
+  fi
 
-# pip check
-if [ -z $(which pip) ];
-then
-  apt-get install python-pip -y
+  if [ -z "$(which brew)" ]; then
+    su socen -c 'yes | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  fi
+else
+  echo "This is neither a Macbook or a Linux Machine"
+  return
 fi
 
-
 # ansible check
-if [ -z $(which ansible) ];
+if [ -z "$(which ansible)" ];
 then
   pip install ansible
 fi
 
-
-# git check
-if [ -z $(which git) ];
-then
-  apt-get install git
-fi
-
-
-# repo check
-if [ -d /home/socen/development/ansible ];
-then
-  cd /home/socen/development/ansible
-  git pull
-else
-  mkdir -p /home/socen/development
-  git clone https://github.com/WilsonSo/ansible.git
-  cd ansible
-fi
-
-
 # case statement for arguments
 arg=$1
+playbookPath="ansible-playbook playbooks/desktop-setup.yaml -K"
 
 case $arg
 in
   check)
     echo "Running ansible check"
-    ansible-playbook playbooks/ubuntu-desktop.yaml -K --check
+    ${playbookPath} --check
     ;;
   diff)
     echo "Running ansible check and diff"
-    ansible-playbook playbooks/ubuntu-desktop.yaml -K --check --diff
+    ${playbookPath} --check --diff
     ;;
   *)
     echo "Running ansible"
-    ansible-playbook playbooks/ubuntu-desktop.yaml -K
+    ${playbookPath}
     ;;
 esac
