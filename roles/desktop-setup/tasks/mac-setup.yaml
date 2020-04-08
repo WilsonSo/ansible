@@ -23,6 +23,7 @@
     - curl
     - nmap
     - vim
+    - protobuf
 
 - name: Install brew cask mac applications
   become_user: socen
@@ -40,3 +41,4 @@
     - whatsapp
     - coconutbattery
     - vagrant
+    - virtualbox
