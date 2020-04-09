@@ -23,6 +23,7 @@
     - curl
     - nmap
     - vim
+    - go
     - protobuf
 
 - name: Install brew cask mac applications
