@@ -25,6 +25,7 @@
     - vim
     - go
     - protobuf
+    - terraform
 
 - name: Install brew cask mac applications
   become_user: socen
